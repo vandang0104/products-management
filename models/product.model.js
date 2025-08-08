@@ -7,6 +7,8 @@ const productSchema = new mongoose.Schema({
   discountPercentage: Number,
   stock: Number,
   thumbnail: String,
+  status: String,
+  position: Number,
   deleted: Boolean
 });
 
