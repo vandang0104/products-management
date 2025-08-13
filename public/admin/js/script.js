@@ -16,3 +16,23 @@ buttonStatus.forEach(button => {
   })
 })
 // END Button status 
+
+// Form search
+const formSearch = document.querySelector("#form-search")
+
+if(formSearch){
+  let url = new URL(location.href) ;
+  formSearch.addEventListener("submit",e =>{
+    e.preventDefault() ;
+    const keyword = e.target.elements.keyword.value ;
+
+    if(keyword){
+      url.searchParams.set("keyword",keyword)
+    } else {
+      url.searchParams.delete("keyword") ;
+    }
+
+    location.href = url.href ;
+  })
+}
+// END Form search

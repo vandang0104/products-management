@@ -3,6 +3,7 @@
 const Product = require("../../models/product.model") ;
 
 module.exports.index = async (req,res)=>{
+
   let filterStatus =[
     {
       name:"Tất cả" ,
@@ -31,6 +32,11 @@ module.exports.index = async (req,res)=>{
   let find = {
     deleted: false 
   }
+
+  if(req.query.keyword){
+    find.title = { $regex: req.query.keyword, $options: "i" };
+  }
+  
   if(req.query.status){
     find.status = req.query.status ;
   }
