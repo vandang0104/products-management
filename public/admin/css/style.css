@@ -53,3 +53,7 @@ header .inner-logo a {
     text-decoration: underline; 
 }
 /* End Sider */
+
+.badge {
+  text-decoration: none;
+}
