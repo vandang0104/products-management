@@ -3,6 +3,8 @@
 const Product = require("../../models/product.model") ;
 const filterStatusHelper = require("../../helpers/filterStatus") ;
 const searchHelper = require("../../helpers/search") ;
+const paginationHelper = require("../../helpers/pagination") ;
+const pagination = require("../../helpers/pagination");
 
 module.exports.index = async (req,res)=>{
   const filterStatus = filterStatusHelper(req.query) ; 
@@ -21,14 +23,15 @@ module.exports.index = async (req,res)=>{
     find.status = req.query.status ;
   }
 
-  const products = await Product.find(find) ;
+  const objectPagination = await paginationHelper(req.query,Product,find)
 
-  // console.log(products) ;
+  const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip) ;
   
   res.render("admin/pages/product/index",{
     pageTitle: "Danh sách sản phẩm" ,
     products: products,
     filterStatus:filterStatus,
-    keyword: objectSearch.keyword 
+    keyword: objectSearch.keyword,
+    pagination: objectPagination
   }) ;
 }

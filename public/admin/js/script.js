@@ -36,3 +36,22 @@ if(formSearch){
   })
 }
 // END Form search
+
+// Pagination
+const buttonPagination = document.querySelectorAll(".page-link")
+
+buttonPagination.forEach(button =>{
+  button.addEventListener('click',()=>{
+    let url = new URL(location.href) ;
+    const page = button.getAttribute("button-pagination")
+
+    if(page>1){
+      url.searchParams.set("page",page)
+    }else{
+      url.searchParams.delete("page") ;
+    }
+
+    location.href = url.href ;
+  })
+})
+// END Pagination

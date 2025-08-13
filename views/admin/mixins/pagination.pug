@@ -1,0 +1,8 @@
+mixin pagination(pagination)
+  - for (var i = 0; i < pagination.totalPages; i++)
+    li(class=`page-item ${pagination.currentPage == i+1?"active" : ""}`)
+        button(
+          class="page-link"
+          button-pagination = i+1
+        ) #{i+1}
+
