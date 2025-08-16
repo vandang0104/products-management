@@ -5,9 +5,10 @@ buttonStatus.forEach(button => {
   button.addEventListener('click',()=>{
     let url = new URL(location.href) ;
     const status = button.getAttribute("button-status") ;
-
+    
     if(status){
       url.searchParams.set("status",status)
+      url.searchParams.set("page",1)
     }else{
       url.searchParams.delete("status") ;
     }
