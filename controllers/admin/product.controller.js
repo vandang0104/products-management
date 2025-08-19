@@ -76,6 +76,7 @@ module.exports.changeMulti = async (req, res) => {
           deletedAt: new Date()
         }
       )
+      req.flash('success', `Đã xóa thành công ${ids.length} sản phẩm!`);
       break;
     case "change-position":
       for (const item of ids) {
@@ -99,6 +100,8 @@ module.exports.deleteItem = async (req, res) => {
       deleted: true,
       deletedAt: new Date()
     });
+  
+  req.flash('success', `Cập nhật trạng thái thành công sản phẩm!`);
   const redirectUrl = req.get("Referer") || "/admin/products";
   res.redirect(redirectUrl);
 }
