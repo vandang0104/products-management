@@ -1,5 +1,5 @@
 const PATH_ADMIN = "/admin"
 
-module.exports= {
+module.exports = {
   prefixAdmin: PATH_ADMIN
 }
