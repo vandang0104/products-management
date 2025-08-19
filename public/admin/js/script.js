@@ -69,38 +69,43 @@ if (checkboxMulti) {
   });
   inputsId.forEach(input => {
     input.addEventListener("click", () => {
-      const countChecked = checkboxMulti.querySelectorAll("input[name='id']:checked").length ;
-      inputCheckAll.checked = countChecked == inputsId.length ? true : false ;
+      const countChecked = checkboxMulti.querySelectorAll("input[name='id']:checked").length;
+      inputCheckAll.checked = countChecked == inputsId.length ? true : false;
     })
   })
 }
 // END Checkbox
 
 // Form change multi
-const formChangeMulti = document.querySelector("[form-change-multi]") ;
-if(formChangeMulti){
-  formChangeMulti.addEventListener("submit", e =>{
-    e.preventDefault() ;
-    const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked") ; 
-    const typeChange = e.target.elements.type.value ;
-    if(typeChange == "delete-all"){
-      const isConfirm = confirm("Bạn có chắc muốn xóa những sản phẩm này không?") ;
-      if(!isConfirm){
-        return ;
+const formChangeMulti = document.querySelector("[form-change-multi]");
+if (formChangeMulti) {
+  formChangeMulti.addEventListener("submit", e => {
+    e.preventDefault();
+    const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked");
+    const typeChange = e.target.elements.type.value;
+    if (typeChange == "delete-all") {
+      const isConfirm = confirm("Bạn có chắc muốn xóa những sản phẩm này không?");
+      if (!isConfirm) {
+        return;
       }
     }
-    if(inputsChecked.length>0){
-      let ids = [] ;
+    if (inputsChecked.length > 0) {
+      let ids = [];
       const inputIds = formChangeMulti.querySelector("input[name ='ids']")
-      inputsChecked.forEach(input=> {
+      inputsChecked.forEach(input => {
         const id = input.value;
-        ids.push(id) ;
+        if (typeChange == "change-position") {
+          const position = input.closest("tr").querySelector("input[name='position']").value;
+          ids.push(`${id}-${position}`);
+        } else {
+          ids.push(id);
+        }
       })
-      inputIds.value = `${ids.join(", ")}` 
-      formChangeMulti.submit() ;
+      inputIds.value = `${ids.join(", ")}`
+      formChangeMulti.submit();
     } else {
-      alert("VUI LÒNG CHỌN ÍT NHẤT 1 BẢN GHI") ;
-    } 
+      alert("VUI LÒNG CHỌN ÍT NHẤT 1 BẢN GHI");
+    }
   })
 }
 // END Form change multi

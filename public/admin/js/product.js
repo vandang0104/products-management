@@ -1,18 +1,18 @@
 // Change status
 const buttonChangeStatus = document.querySelectorAll("[button-change-status]")
 
-if(buttonChangeStatus.length>0){
+if (buttonChangeStatus.length > 0) {
   const formChangeStatus = document.querySelector("#form-change-status")
   const path = formChangeStatus.getAttribute("data-path")
-  buttonChangeStatus.forEach(button=>{
-    button.addEventListener("click",()=>{
+  buttonChangeStatus.forEach(button => {
+    button.addEventListener("click", () => {
       const statusCurrent = button.getAttribute("data-status");
       const id = button.getAttribute("data-id")
 
-      const statusChange = statusCurrent =="active" ? "inactive" : "active" ;
+      const statusChange = statusCurrent == "active" ? "inactive" : "active";
 
-      const action = path + `/${statusChange}/${id}?_method=PATCH` ;
-      formChangeStatus.action = action ;
+      const action = path + `/${statusChange}/${id}?_method=PATCH`;
+      formChangeStatus.action = action;
 
       formChangeStatus.submit();
     })
@@ -23,16 +23,16 @@ if(buttonChangeStatus.length>0){
 
 // Delete item
 const buttonDelete = document.querySelectorAll("[button-delete]")
-if(buttonDelete){
-  const formChangeItem = document.querySelector("#form-change-item") ;
+if (buttonDelete) {
+  const formChangeItem = document.querySelector("#form-change-item");
   buttonDelete.forEach(button => {
-    button.addEventListener("click",()=>{
-      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này không?") ;
-      if(isConfirm){
-        const id = button.getAttribute("data-id") ;
+    button.addEventListener("click", () => {
+      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này không?");
+      if (isConfirm) {
+        const id = button.getAttribute("data-id");
         const path = formChangeItem.getAttribute("data-path")
-        formChangeItem.action = path + `/${id}?_method=DELETE` ;
-        formChangeItem.submit() ;
+        formChangeItem.action = path + `/${id}?_method=DELETE`;
+        formChangeItem.submit();
       }
     })
   })
