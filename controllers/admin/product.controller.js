@@ -1,5 +1,3 @@
-// [GET] /admin/products
-
 const Product = require("../../models/product.model") ;
 const filterStatusHelper = require("../../helpers/filterStatus") ;
 const searchHelper = require("../../helpers/search") ;
@@ -7,6 +5,7 @@ const paginationHelper = require("../../helpers/pagination") ;
 const pagination = require("../../helpers/pagination");
 const { response } = require("express");
 
+// [GET] /admin/products
 module.exports.index = async (req,res)=>{
   const filterStatus = filterStatusHelper(req.query) ; 
 
@@ -47,7 +46,6 @@ module.exports.changeStatus = async (req,res) => {
   res.redirect(redirectUrl || "/admin/products"); 
 }
 
-
 // [PATCH] /admin/products/change-multi
 module.exports.changeMulti = async (req,res) => {
   const status = req.body.type ;
@@ -64,6 +62,14 @@ module.exports.changeMulti = async (req,res) => {
       await Product.updateMany(
         { _id: { $in: ids } }, 
         { status: status }     
+      )
+      break;
+    case "delete-all":
+      await Product.updateMany(
+        { _id: { $in: ids } }, 
+        { deleted: true, 
+          deletedAt: new Date() 
+        }     
       )
       break;
     default:

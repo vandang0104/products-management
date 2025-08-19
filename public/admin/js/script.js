@@ -80,7 +80,15 @@ if (checkboxMulti) {
 const formChangeMulti = document.querySelector("[form-change-multi]") ;
 if(formChangeMulti){
   formChangeMulti.addEventListener("submit", e =>{
+    e.preventDefault() ;
     const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked") ; 
+    const typeChange = e.target.elements.type.value ;
+    if(typeChange == "delete-all"){
+      const isConfirm = confirm("Bạn có chắc muốn xóa những sản phẩm này không?") ;
+      if(!isConfirm){
+        return ;
+      }
+    }
     if(inputsChecked.length>0){
       let ids = [] ;
       const inputIds = formChangeMulti.querySelector("input[name ='ids']")
@@ -89,6 +97,7 @@ if(formChangeMulti){
         ids.push(id) ;
       })
       inputIds.value = `${ids.join(", ")}` 
+      formChangeMulti.submit() ;
     } else {
       alert("VUI LÒNG CHỌN ÍT NHẤT 1 BẢN GHI") ;
     } 
