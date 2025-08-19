@@ -83,6 +83,7 @@ module.exports.changeMulti = async (req, res) => {
         const arr = item.split("-");
         await Product.updateOne({ _id: arr[0] }, { position: parseInt(arr[1]) });
       }
+      req.flash('success', `Đã đổi vị trí thành công cho ${ids.length} sản phẩm!`);
       break;
     default:
       break;
