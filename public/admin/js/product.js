@@ -1,3 +1,4 @@
+// Change status
 const buttonChangeStatus = document.querySelectorAll("[button-change-status]")
 
 if(buttonChangeStatus.length>0){
@@ -17,3 +18,23 @@ if(buttonChangeStatus.length>0){
     })
   })
 }
+
+//END Change status
+
+// Delete item
+const buttonDelete = document.querySelectorAll("[button-delete]")
+if(buttonDelete){
+  const formChangeItem = document.querySelector("#form-change-item") ;
+  buttonDelete.forEach(button => {
+    button.addEventListener("click",()=>{
+      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này không?") ;
+      if(isConfirm){
+        const id = button.getAttribute("data-id") ;
+        const path = formChangeItem.getAttribute("data-path")
+        formChangeItem.action = path + `/${id}?_method=DELETE` ;
+        formChangeItem.submit() ;
+      }
+    })
+  })
+}
+// END Delete item

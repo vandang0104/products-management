@@ -37,7 +37,7 @@ module.exports.index = async (req,res)=>{
   }) ;
 }
 
-// [GET] /admin/products/change-status/:active/:id
+// [PATCH] /admin/products/change-status/:active/:id
 module.exports.changeStatus = async (req,res) => {
   const status = req.params.status ;
   const id = req.params.id ;
@@ -48,7 +48,7 @@ module.exports.changeStatus = async (req,res) => {
 }
 
 
-// [GET] /admin/products/change-multi
+// [PATCH] /admin/products/change-multi
 module.exports.changeMulti = async (req,res) => {
   const status = req.body.type ;
   const ids = req.body.ids.split(", ") ;
@@ -71,4 +71,12 @@ module.exports.changeMulti = async (req,res) => {
   }
   const redirectUrl = req.get("referer"); 
   res.redirect(redirectUrl || "/admin/products"); 
+}
+
+// [DELETE] /admin/products/delete/:id
+module.exports.deleteItem = async (req,res) => {
+  const id = req.params.id ;
+  await Product.deleteOne({_id:id}) ;
+  const redirectUrl = req.get("Referer") || "/admin/products";
+  res.redirect(redirectUrl);
 }
