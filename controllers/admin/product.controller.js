@@ -119,7 +119,9 @@ module.exports.createPost = async (req, res) => {
   if (req.body.position === "") {
     req.body.position = await Product.estimatedDocumentCount() + 1;
   }
+  req.body.thumbnail = `/upload/${req.file.filename}`
   await Product.create(req.body);
+  console.log(req.file) ;
   req.flash('success', 'Thêm sản phẩm thành công!');
   res.redirect(`${req.app.locals.prefixAdmin}/products/create`);
 }
