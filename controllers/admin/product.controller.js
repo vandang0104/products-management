@@ -45,7 +45,7 @@ module.exports.changeStatus = async (req, res) => {
   req.flash('success', 'Cập nhật trạng thái thành công!');
 
   const redirectUrl = req.get("referer");
-  res.redirect(redirectUrl || "/admin/products");
+  res.redirect(redirectUrl || `${req.app.locals.prefixAdmin}/products`);
 }
 
 // [PATCH] /admin/products/change-multi
@@ -89,7 +89,7 @@ module.exports.changeMulti = async (req, res) => {
       break;
   }
   const redirectUrl = req.get("referer");
-  res.redirect(redirectUrl || "/admin/products");
+  res.redirect(redirectUrl || `${req.app.locals.prefixAdmin}/products`);
 }
 
 // [DELETE] /admin/products/delete/:id
@@ -101,8 +101,25 @@ module.exports.deleteItem = async (req, res) => {
       deleted: true,
       deletedAt: new Date()
     });
-  
+
   req.flash('success', `Cập nhật trạng thái thành công sản phẩm!`);
-  const redirectUrl = req.get("Referer") || "/admin/products";
+  const redirectUrl = req.get("Referer") || `${req.app.locals.prefixAdmin}/products`;
   res.redirect(redirectUrl);
+}
+
+// [GET] /admin/products/create
+module.exports.create = async (req, res) => {
+  res.render("admin/pages/product/create", {
+    pageTitle: "Thêm mới sản phẩm",
+  });
+}
+
+// [POST] /admin/products/create
+module.exports.createPost = async (req, res) => {
+  if (req.body.position === "") {
+    req.body.position = await Product.estimatedDocumentCount() + 1;
+  }
+  await Product.create(req.body);
+  req.flash('success', 'Thêm sản phẩm thành công!');
+  res.redirect(`${req.app.locals.prefixAdmin}/products/create`);
 }
