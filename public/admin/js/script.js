@@ -1,21 +1,23 @@
 // Button status 
 const buttonStatus = document.querySelectorAll("[button-status]");
 
-buttonStatus.forEach(button => {
-  button.addEventListener('click', () => {
-    let url = new URL(location.href);
-    const status = button.getAttribute("button-status");
+if (buttonStatus) {
+  buttonStatus.forEach(button => {
+    button.addEventListener('click', () => {
+      let url = new URL(location.href);
+      const status = button.getAttribute("button-status");
 
-    if (status) {
-      url.searchParams.set("status", status)
-      url.searchParams.set("page", 1)
-    } else {
-      url.searchParams.delete("status");
-    }
+      if (status) {
+        url.searchParams.set("status", status)
+        url.searchParams.set("page", 1)
+      } else {
+        url.searchParams.delete("status");
+      }
 
-    location.href = url.href;
+      location.href = url.href;
+    })
   })
-})
+}
 // END Button status 
 
 // Form search
@@ -41,20 +43,22 @@ if (formSearch) {
 // Pagination
 const buttonPagination = document.querySelectorAll(".page-link")
 
-buttonPagination.forEach(button => {
-  button.addEventListener('click', () => {
-    let url = new URL(location.href);
-    const page = button.getAttribute("button-pagination")
+if (buttonPagination) {
+  buttonPagination.forEach(button => {
+    button.addEventListener('click', () => {
+      let url = new URL(location.href);
+      const page = button.getAttribute("button-pagination")
 
-    if (page > 1) {
-      url.searchParams.set("page", page)
-    } else {
-      url.searchParams.delete("page");
-    }
+      if (page > 1) {
+        url.searchParams.set("page", page)
+      } else {
+        url.searchParams.delete("page");
+      }
 
-    location.href = url.href;
+      location.href = url.href;
+    })
   })
-})
+}
 // END Pagination
 
 // Checkbox
@@ -125,3 +129,25 @@ if (showAlert) {
   })
 }
 // END Show alert
+
+// Preview Image Before Upload
+const img = document.querySelector("#thumbnail")
+const previewImg = document.querySelector("#preview-img")
+const removeButton = document.querySelector("#remove-btn")
+
+img.addEventListener('change', e => {
+  const [file] = e.target.files;
+  if (file) {
+    previewImg.src = URL.createObjectURL(file);
+    previewImg.classList.remove("d-none")
+    removeButton.classList.remove("d-none")
+  }
+})
+
+removeButton.addEventListener("click", () => {
+  img.value = "";
+  previewImg.src = "#";
+  previewImg.classList.add("d-none");
+  removeButton.classList.add("d-none");
+});
+// END Preview Image Before Upload

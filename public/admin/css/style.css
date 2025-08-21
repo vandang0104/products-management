@@ -96,3 +96,20 @@ header .inner-logo a {
 
 
 /* End Show Alert */
+
+.form-group #remove-btn {
+  width:25px;
+  height:25px; 
+  line-height:10px; 
+  padding:0;
+}
+
+/* Image Preview */
+.image-preview {
+  width: 150px;
+  height: auto;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+}

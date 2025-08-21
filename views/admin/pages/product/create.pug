@@ -61,6 +61,7 @@ block main
       )
     div(class="form-group")
       label(for="thumbnail") Ảnh
+      br
       input(
         type="file"
         class="form-control-file"
@@ -68,6 +69,18 @@ block main
         name="thumbnail"
         accept ="image/*"
       )
+      button(
+        id="remove-btn"
+        type="button"
+        class="btn btn-sm btn-outline-primary rounded-circle d-none"
+      ) ✖
+      br
+      img(
+        id="preview-img" 
+        src="#"
+        class="d-none mt-2 image-preview"
+      )
+
     div(class="form-group")
       label(for="position") Vị trí
       input(
