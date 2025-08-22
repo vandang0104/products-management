@@ -208,7 +208,7 @@ module.exports.editPatch = async (req, res) => {
 module.exports.detail = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    
+
     res.render("admin/pages/product/detail", {
       pageTitle: product.title,
       product: product
