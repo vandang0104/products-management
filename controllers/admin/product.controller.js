@@ -203,3 +203,18 @@ module.exports.editPatch = async (req, res) => {
     res.redirect(`${req.app.locals.prefixAdmin}/products`);
   }
 }
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    
+    res.render("admin/pages/product/detail", {
+      pageTitle: product.title,
+      product: product
+    });
+  } catch (error) {
+    req.flash('error', 'Id không tồn tại hoặc lỗi khi lấy thông tin sản phẩm');
+    res.redirect(`${req.app.locals.prefixAdmin}/products`);
+  }
+}

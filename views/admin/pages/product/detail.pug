@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+  //- Tiêu đề sản phẩm
+  if (product.title)
+    h1(id="product-title" class="mb-4 text-primary fw-bold border-bottom pb-2") #{product.title}
+
+  //- Giá sản phẩm
+  if (product.price)
+    div(id="product-price" class="mb-3 fs-5 text-success fw-semibold")
+      | 💲 #{product.price}
+
+  //- Giảm giá
+  if (product.discountPercentage)
+    div(id="product-discount" class="mb-3 fs-6 text-danger")
+      | 🔻 Giảm giá: 
+      span(class="fw-bold") #{product.discountPercentage}%
+
+  //- Tồn kho
+  if (product.stock)
+    div(id="product-stock" class="mb-3")
+      span(class="badge bg-warning text-dark") Còn lại: #{product.stock}
+
+  //- Hình ảnh sản phẩm
+  if (product.thumbnail)
+    div(id="product-thumbnail" class="text-center mb-4")
+      img(
+        src=product.thumbnail
+        alt="Ảnh sản phẩm"
+        class="img-fluid rounded shadow-sm"
+        style="max-width: 180px;"
+      )
+
+  //- Trạng thái
+  if (product.status)
+    div(id="product-status" class="mb-3")
+      span(class="fw-bold me-2") Trạng thái:
+      if (product.status === "active")
+        span(id="status-active" class="badge bg-success") Hoạt động
+      else
+        span(id="status-inactive" class="badge bg-danger") Dừng hoạt động
+
+  //- Vị trí
+  if (product.position)
+    div(id="product-position" class="mb-3 text-muted")
+      | 📍 Vị trí: 
+      span(class="fw-semibold") #{product.position}
+
+  //- Mô tả
+  if (product.description)
+    div(id="product-description" class="mb-4 p-3 bg-light rounded shadow-sm fst-italic")
+      | #{product.description}
+
+  a(
+    href=`${prefixAdmin}/products/edit/${product._id}`
+    class = "btn btn-warning"
+  ) Chỉnh sửa
+
+  
+  script(src="/admin/js/product.js")
