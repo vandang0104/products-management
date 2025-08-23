@@ -40,8 +40,7 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 route(app);
 routeAdmin(app);
 
-module.exports.handler = serverless(app);
 
-// app.listen(port, () => {
-//   console.log(`App listener port ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`App listener port ${port}`)
+})
