@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
-const serverless = require("serverless-http");
 
 require("dotenv").config();
 
@@ -39,7 +38,6 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 route(app);
 routeAdmin(app);
-
 
 app.listen(port, () => {
   console.log(`App listener port ${port}`)
