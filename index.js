@@ -42,3 +42,5 @@ routeAdmin(app);
 app.listen(port, () => {
   console.log(`App listener port ${port}`)
 })
+
+module.exports.handler = serverless(app);
