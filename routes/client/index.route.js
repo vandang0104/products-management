@@ -4,4 +4,7 @@ const routerProducts = require("./product.route");
 module.exports = (app) => {
   app.use('/', routerHome);
   app.use('/products', routerProducts);
+  app.get('/api/test', (req, res) => {
+    res.send('API test successful!');
+});
 }
